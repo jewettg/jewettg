@@ -2,6 +2,9 @@
 <div style="font-size: 16px; font-weight: bold;">Greg Jewett</div>
 <div>Solutions Consultant/Developer</div>
 <hr>
+<span style="color:green;font-weight:700;font-size:20px"> 
+markdown color font styles
+</span>
 
 ## Languages used for Development
 
