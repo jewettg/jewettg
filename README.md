@@ -1,5 +1,5 @@
 <div style="text-align:center;"><img src="https://github.com/jewettg/jewettg/blob/main/2022-wow-orange-circle.png" height="150"></div>
-<div style="font-size: 14pt;">Greg Jewett</div>
+<div style="font-size: 16px; font-weight:bold;">Greg Jewett</div>
 <div>Solutions Consultant/Developer</div>
 <hr>
 
