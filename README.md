@@ -1,8 +1,7 @@
 <div style="text-align:center;"><img src="https://github.com/jewettg/jewettg/blob/main/2022-wow-orange-circle.png" height="150"></div>
-<h1>Greg Jewett</h1>
-
+<div style="font-size: 14pt;">Greg Jewett</div>
 <div>Solutions Consultant/Developer</div>
-<br>
+<hr>
 
 ## Languages used for Development
 
