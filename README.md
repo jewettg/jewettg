@@ -2,7 +2,7 @@
 <b>Greg Jewett</b><br/>
 <i>Solutions Consultant/Developer</i>
 <hr>
-
+6'4 redhead (not much longer, losing it all); Technology and Gadget enthusiast, love using my Mac, iPhone, iPad, enjoy programming and learning new stuff.
 
 ## Languages used for Development
 
