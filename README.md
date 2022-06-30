@@ -1,4 +1,4 @@
-<img align="center" src="https://github.com/jewettg/jewettg/blob/main/2022-wow-orange-circle.png" height="50">
+<span style="align:center;"><img src="https://github.com/jewettg/jewettg/blob/main/2022-wow-orange-circle.png" height="150"></span>
 <h1 align="center">Greg Jewett</h1>
 
 <p align="center">Solutions Consultant/Developer</p>
