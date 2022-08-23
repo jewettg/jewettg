@@ -1,4 +1,4 @@
-<img src="https://github.com/jewettg/jewettg/blob/main/2022-wow-orange-circle.png" height="150">
+<img src="https://github.com/jewettg/jewettg/blob/main/images/2022-wow-orange-circle.png" height="150">
 <b>Greg Jewett</b><br/>
 <i>Solutions Consultant/Developer</i>
 <hr>
@@ -19,7 +19,7 @@
   <img align="left" alt="jewettg Linkdin" width="21px" src="https://raw.githubusercontent.com/edent/SuperTinyIcons/099dc12b59179d07d534069bc8551718f786d91a/images/svg/linkedin.svg" />
 </a>
 <a href="https://sites.google.com/ejewett.com/gregjewett/home">
-  <img align="left" alt="jewettg Medium" width="21px" src="https://github.com/jewettg/jewettg/raw/main/www-icon.png" />
+  <img align="left" alt="jewettg Medium" width="21px" src="https://github.com/jewettg/jewettg/raw/main/images/www-icon.png" />
 </a>
 <br/><br/>
 
