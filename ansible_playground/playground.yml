@@ -1,0 +1,186 @@
+---
+
+- name: A playground playbooks for testing plays...
+  hosts:
+    - localhost
+
+  vars:
+    # cred_type: "Ansible Galaxy/Automation Hub API Token"
+    # pb_name: "{{ 'cred_' + cred_type | regex_replace('[^A-Za-z0-9]', '_') | lower() + '.yml' }}"
+    
+    # stache_endpoint: e08b220e5ac8d1897c0d7ff43b2d835d
+    # stache_xs_readkey: !vault |
+    #           $ANSIBLE_VAULT;1.1;AES256
+    #           62366633336665323037363433373838653964643232366339646364643164633234633764626661
+    #           3530363662353831323933313766393030353036366564340a306536636631376332376630326566
+    #           30326430396166333962333834316437356266666436373633633839313364663937643138346631
+    #           6336386134323631370a646230316136626663313731343134613533336362613037326261323866
+    #           34383164386531336138376435393032613031356433383134326536333264643564313738363439
+    #           63643666306231623862326566333131313636646239653034356233663230656634636361333162
+    #           65623336303433373637363361333831303732643939353735363036666261623836353033306231
+    #           39626232663330356433
+    # svc_acct_aap_token: !vault |
+    #     $ANSIBLE_VAULT;1.1;AES256
+    #     61363331346338343337343831663730386536303334343762393761373063653838633865346433
+    #     6439386338663534333637393164353633653035313062320a626530363962333363346232656261
+    #     38613064313962343039313963343231623030366637616233663132643864383839336337316565
+    #     3366306566316531320a326538653764646163356337396639613266343739323461383332643439
+    #     37313334396264386664396434356330633663303035336637643439636135356633
+    splunk_forwarder_version: "7.2.1-ddff1c41e5cf"
+
+  tasks:
+
+    - name: Task name
+      stat:
+        path: '/opt/splunkforwarder/etc/splunk.version'
+      register: sv_exists
+
+    - debug:
+        var: sv_exists.stat.exists
+
+    - set_fact:
+        SPLUNK_VERSION: "{% if sv_exists.stat.exists %}1000.1000.1000{% else %}0.0.0{% endif %}"
+
+    - debug:
+        var: SPLUNK_VERSION
+
+
+    # - name: Get splunk.version variables
+    #   set_fact:
+    #     "{{ 'SPLUNK_' + item.split('=')[0] }}": "{{ item.split('=')[1] }}"
+    #   when: "'=' in item"
+    #   loop: "{{ lookup('file', '/opt/splunkforwarder/etc/splunk.version').splitlines() }}"
+
+    - name: Get splunk.version variables
+      set_fact:
+        "{{ 'SPLUNK_' + item.split('=')[0] }}": "{{ item.split('=')[1] }}"
+      when: "'=' in item"
+      loop: "{% if sv_exists.stat.exists %}{{ lookup('file', '/opt/splunkforwarder/etc/splunk.version').splitlines() }}{% else %}[]{% endif %}"
+
+    - debug:
+        var: SPLUNK_VERSION
+
+    - set_fact: 
+        splunk_compare: "{{ SPLUNK_VERSION < splunk_forwarder_version }}"
+   
+    - debug:
+        msg: "{{ 'Need to install: ' + splunk_forwarder_version|string}}"
+      when:  SPLUNK_VERSION < splunk_forwarder_version 
+
+    - debug:
+        msg: "{{ 'No install needed, current version: ' + SPLUNK_VERSION|string}}"
+      when:  SPLUNK_VERSION >= splunk_forwarder_version 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # - name: Retrieve the Hub Sync Token from Stache
+    #   vars:
+    #     the_url: "{{ 'https://stache-campus-proxy.security.utexas.edu/api/v2/entry/' + stache_endpoint + '/data/read' | urlencode }}"
+    #   local_action:
+    #     module: uri
+    #     url: "{{ the_url }}"
+    #     method: GET
+    #     status_code: 200
+    #     headers:
+    #       Content-Type: application/json
+    #       X-STACHE-READ-KEY: "{{ stache_xs_readkey }}"
+    #   register: stacheResult
+
+    # - name: Ask RedHat to refresh the token (via curl command)
+    #   vars:
+    #     the_url: "{{ 'https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token' }}"
+    #   local_action:
+    #     module: uri
+    #     url: "{{ the_url }}"
+    #     method: POST
+    #     body_format: form-urlencoded
+    #     body: 
+    #       grant_type: refresh_token
+    #       client_id: cloud-services
+    #       refresh_token: "{{ (stacheResult.json.secret | from_json).token }}"
+    #     dest: /dev/null
+    #     status_code: 200
+    #     headers:
+    #       Content-Type: application/x-www-form-urlencoded
+    #   register: refreshResult
+
+    # - debug:
+    #     msg: " {{ 'Result: '+refreshResult.msg+'; Did it fail -> '+refreshResult.failed }}"
+
+    # - name: Multi-fact Set
+    #   set_fact:
+    #     deploy_stache_response:
+    #       json: '{"secret": "{\"passphrase\": \"abcdefghijklmnopqrstuvwxyz\"}","memo": "this is a secret memo"}'
+ 
+
+    # - name: Extract the full Demo Service Github Deploy Key Passphrase and Private Key
+    #   set_fact:
+    #     deploy_json: '{{ (deploy_stache_response.json | from_json) }}'
+
+    # - debug:
+    #     var: deploy_json
+
+
+    # - name: more facts
+    #   set_fact:
+    #     deploy_private_key: '{{ (deploy_stache_response.json | from_json).memo }}'
+    #     deploy_passphrase: '{{ ((deploy_stache_response.json | from_json).secret | from_json).passphrase }}'
+
+    # - debug:
+    #     var: deploy_private_key
+
+    # - debug:
+    #     var: deploy_passphrase
+
+    # - name: Retrieve the Hub Sync Token from Stache
+    #   vars:
+    #     the_url: "{{ 'https://stache-campus-proxy.security.utexas.edu/api/v2/entry/' + stache_endpoint + '/data/read' | urlencode }}"
+    #   local_action:
+    #     module: uri
+    #     url: "{{ the_url }}"
+    #     method: GET
+    #     status_code: 200
+    #     headers:
+    #       Content-Type: application/json
+    #       X-STACHE-READ-KEY: "{{ stache_xs_readkey }}"
+    #   register: stacheResult
+    #   # no_log: true
+
+    # - name: Ask RedHat to refresh the token (via curl command)
+    #   vars:
+    #     the_url: "{{ 'https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token' }}"
+    #   local_action:
+    #     module: uri
+    #     url: "{{ the_url }}"
+    #     method: POST
+    #     body_format: form-urlencoded
+    #     body: 
+    #       grant_type: refresh_token
+    #       client_id: cloud-services
+    #       refresh_token: "{{ (stacheResult.json.secret | from_json).token }}"
+    #     dest: /dev/null
+    #     status_code: 200
+    #     headers:
+    #       Content-Type: application/x-www-form-urlencoded
+    #   register: refreshResult
+    #   # no_log: true
+
+    # - debug:
+    #     msg: " {{ 'Result: '+refreshResult.msg+'; Did it fail -> '+refreshResult.failed }}"

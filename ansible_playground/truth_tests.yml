@@ -1,0 +1,70 @@
+
+
+---
+
+- name: Define the variables
+  hosts:
+    - 127.0.0.1
+
+  vars:
+    var1: "True"
+    authorize1: "{% if var1 is not defined %}''{% elif var1 is sameas true %}true{% else %}false{% endif %}"
+
+    var2: "false"
+    authorize2: "{% if var2 is not defined %}''{% elif var2 is sameas true %}true{% else %}false{% endif %}"
+
+    var3: "True"
+    authorize3: "{% if var3 is not defined %}''{% elif var3 is sameas true %}true{% else %}false{% endif %}"
+
+    var4: 0
+    authorize4: "{% if var4 is not defined %}''{% elif var4 is sameas true %}true{% else %}false{% endif %}"
+
+    var5: "Yes"
+    authorize5: "{% if var5 is not defined %}''{% elif var5 is sameas true %}true{% else %}false{% endif %}"
+
+    var6: "No"
+    authorize6: "{% if var6 is not defined %}''{% elif var6 is sameas true %}true{% else %}false{% endif %}"
+
+    var7: "on"
+    authorize7: "{% if var7 is not defined %}''{% elif var7 is sameas true %}true{% else %}false{% endif %}"
+
+    var8: "off"
+    authorize8: "{% if var8 is not defined %}''{% elif var8 is sameas true %}true{% else %}false{% endif %}"
+
+  tasks:
+    - name: var1
+      debug:
+        var: var1
+
+    - name: authorize1
+      debug:
+        var: authorize1
+
+    - name: authorize2
+      debug:
+        var: authorize2
+
+    - name: authorize3
+      debug:
+        var: authorize3
+
+    - name: authorize4
+      debug:
+        var: authorize4
+
+    - name: authorize5
+      debug:
+        var: authorize5
+
+    - name: authorize6
+      debug:
+        var: authorize6
+
+    - name: authorize7
+      debug:
+        var: authorize7
+
+    - name: authorize8
+      debug:
+        var: authorize8
+
