@@ -1,0 +1,18 @@
+# open ~/.zshrc in using the default editor specified in $EDITOR
+# ----------------------------------------------
+alias ec="$EDITOR $HOME/.zshrc"
+
+# source ~/.zshrc
+# ----------------------------------------------
+alias sc="source $HOME/.zshrc"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+
+# Source the .bash_profile, if it exists.
+# ----------------------------------------------
+if [ -r ~/.bash_profile ]; then
+   source ~/.bash_profile
+fi
+export PATH="/usr/local/opt/ansible@2.9/bin:$PATH"

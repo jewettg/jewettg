@@ -1,0 +1,110 @@
+# ----------------------------------------------
+# Greg Jewett
+# 2022-07-18 Custom Environment done by
+# bash_profile.  Works in ZSH and BASH.
+# ----------------------------------------------
+
+# Source global definitions
+# ----------------------------------------------
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# Source local definitions (".bashrc")
+# ----------------------------------------------
+if [ -r ~/.bashrc ]; then
+   source ~/.bashrc
+fi
+
+
+# Python Related
+# ----------------------------------------------
+# Setting PATH for Python 3.5
+# The orginal version is saved in .bash_profile.pysave
+PATH="/Library/Frameworks/Python.framework/Versions/3.5/bin:${PATH}"
+export PATH
+
+# Setting PATH for Python 3.4
+# The orginal version is saved in .bash_profile.pysave
+PATH="/usr/local/anaconda3/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
+export PATH
+
+
+# PROMPT Modifications and Related
+# ----------------------------------------------
+PROMPT_COMMAND="history -a"
+export HISTSIZE=3000
+
+if [ `ps -p $$ -ocomm=` = "bash" ]
+then
+   export PS1='\[\e[0;2m\]\d \[\e[0;2m\]@ \[\e[0;2m\]\T \[\e[0m\]| \[\e[0;3m\]\w \[\e[0;1m\]\$\[\e[0m\]'
+else
+   export PS1="%F{248}%w%f%F{248} @ %f%F{248}%t%f | %B%F{cyan}%d%f%b~$"
+   PROMPT="%F{248}%w%f%F{248} @ %f%F{248}%t%f | %B%F{cyan}%d%f%b~$"
+fi
+
+
+# *nix shortcut aliases
+# ----------------------------------------------
+alias ls='ls -hF'
+alias ll='ls -lahF'
+
+alias filetree="ls -R | grep ":$" | sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/ /' -e 's/-/|/'"
+alias flp='cc; cd /opt/flask; clear'
+
+
+# OS X Specific Aliases
+# ----------------------------------------------
+alias clearnotify="killall NotificationCenter"
+alias clearbadge="defaults write com.apple.systempreferences AttentionPrefBundleIDs 0 && killall Dock"
+
+
+# TMUX Related Aliases
+# ----------------------------------------------
+# alias t='tmux attach || tmux new-session'
+# alias ta='tmux attach -t'
+# alias tk='tmux kill-session -t'
+# alias tl='tmux list-sessions'
+# alias tn='tmux new-session'
+
+
+# Environment Variables for Ansible
+# ----------------------------------------------
+export ANSIBLE_CONFIG=/etc/ansible/ansible.cfg
+
+
+# Python PyEnv Related
+# ----------------------------------------------
+#if command -v pyenv 1>/dev/null 2>&1; then
+#  eval "$(pyenv init -)"
+#fi
+
+#alias pip=/Users/jewettg/.pyenv/shims/pip3
+#alias python=$(pyenv which python)
+
+
+# CONDA (Python virtual environment) Related
+# ----------------------------------------------
+
+alias fl='conda activate flask'
+alias p3='conda activate p3'
+alias cc='conda activate cert_create'
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/local/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+# END .bash_profile
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

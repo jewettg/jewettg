@@ -1,0 +1,14 @@
+# HTTP requests for API access
+# Import from local directory
+sys.path.append(os.getcwd()+"/requests")
+import requests
+
+
+
+pip install --install-option="--install-purelib=/opt/scripts/deploy_splunk" requests
+pip install --install-option="--install-purelib=/opt/scripts/deploy_splunk" requests[security]
+pip install --ignore-installed --install-option="--install-purelib=/opt/scripts/deploy_splunk/requests" urllib3
+pip install --ignore-installed --install-option="--install-purelib=/opt/scripts/deploy_splunk/requests" chardet
+pip install --ignore-installed --install-option="--install-purelib=/opt/scripts/deploy_splunk/requests" certifi
+pip install --ignore-installed --install-option="--install-purelib=/opt/scripts/deploy_splunk/requests" idna
+
