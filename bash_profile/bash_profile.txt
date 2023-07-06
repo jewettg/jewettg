@@ -1,7 +1,7 @@
 # ----------------------------------------------
 # Greg Jewett
-# 2022-07-18 Custom Environment done by
-# bash_profile.  Works in ZSH and BASH.
+# 2022-07-18 Custom Environment done by bash_profile.  Works in ZSH and BASH.
+# 2023-07-06 Updates for paths, for installed homebrew and Ansible.
 # ----------------------------------------------
 
 # Source global definitions
@@ -71,6 +71,11 @@ alias clearbadge="defaults write com.apple.systempreferences AttentionPrefBundle
 # Environment Variables for Ansible
 # ----------------------------------------------
 export ANSIBLE_CONFIG=/etc/ansible/ansible.cfg
+export PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
+
+# Environment changes for Homebrew
+# ----------------------------------------------
+export PATH="/opt/homebrew/bin:$PATH"
 
 
 # Python PyEnv Related
