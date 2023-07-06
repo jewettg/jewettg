@@ -15,4 +15,3 @@ fi
 if [ -r ~/.bash_profile ]; then
    source ~/.bash_profile
 fi
-export PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
