@@ -1,7 +1,7 @@
 # ----------------------------------------------
 # Greg Jewett
-# 2022-07-18 Custom Environment done by bash_profile.  Works in ZSH and BASH.
-# 2023-07-06 Updates for paths, for installed homebrew and Ansible.
+# 2022-07-18 Custom Environment done by
+# bash_profile.  Works in ZSH and BASH.
 # ----------------------------------------------
 
 # Source global definitions
@@ -28,6 +28,11 @@ export PATH
 # The orginal version is saved in .bash_profile.pysave
 PATH="/usr/local/anaconda3/bin:/Library/Frameworks/Python.framework/Versions/3.4/bin:${PATH}"
 export PATH
+
+# Fix for backspace in Python CLI
+# ----------------------------------------------
+# https://stackoverflow.com/questions/47893138/back-space-not-functional-in-python-and-ipython-in-shell
+export TERMINFO=/usr/share/terminfo
 
 
 # PROMPT Modifications and Related
@@ -71,11 +76,6 @@ alias clearbadge="defaults write com.apple.systempreferences AttentionPrefBundle
 # Environment Variables for Ansible
 # ----------------------------------------------
 export ANSIBLE_CONFIG=/etc/ansible/ansible.cfg
-export PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
-
-# Environment changes for Homebrew
-# ----------------------------------------------
-export PATH="/opt/homebrew/bin:$PATH"
 
 
 # Python PyEnv Related
@@ -97,14 +97,14 @@ alias cc='conda activate cert_create'
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/usr/local/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/usr/local/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/usr/local/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+        export PATH="/usr/local/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
